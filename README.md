@@ -9,6 +9,6 @@ For the time being you can test the library by simply running it.
 $ cargo run -- [arg1] [arg2] [arg3]
 ```
 
-## LICENSE
+## License
 
 Licensed under the MIT License. See ```LICENSE``` for more information.
