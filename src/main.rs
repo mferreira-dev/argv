@@ -1,28 +1,28 @@
 use argv::{Flag, FlagAction};
 use std::env;
 
-const HELP_FLAG_SHORT: &str = "-h";
-const HELP_FLAG_LONG: &str = "--help";
-const ROM_FLAG_SHORT: &str = "-r";
-const ROM_FLAG_LONG: &str = "--rom";
+const FOO_FLAG_SHORT: &str = "-f";
+const FOO_FLAG_LONG: &str = "--foo";
+const BAR_FLAG_SHORT: &str = "-b";
+const BAR_FLAG_LONG: &str = "--bar";
 
 const INVALID_FLAG_MSG: &str = "Invalid flag";
 
 fn main() {
-    let help_flag = Flag::new(
-        vec![HELP_FLAG_SHORT, HELP_FLAG_LONG],
-        FlagAction::NoArg(Box::new(|| println!("Help"))),
+    let foo_flag = Flag::new(
+        vec![FOO_FLAG_SHORT, FOO_FLAG_LONG],
+        FlagAction::NoArg(Box::new(|| println!("foo"))),
     );
 
-    let rom_flag = Flag::new(
-        vec![ROM_FLAG_SHORT, ROM_FLAG_LONG],
+    let bar_flag = Flag::new(
+        vec![BAR_FLAG_SHORT, BAR_FLAG_LONG],
         FlagAction::SingleArg(Box::new(|arg| {
-            let arg = arg.unwrap_or(String::from("Nothing"));
-            println!("ROM: {arg}")
+            let arg = arg.unwrap_or(String::from("nothing"));
+            println!("arg: {arg}")
         })),
     );
 
-    let result = argv::handle_flags(env::args(), vec![help_flag, rom_flag], INVALID_FLAG_MSG);
+    let result = argv::handle_flags(env::args(), vec![foo_flag, bar_flag], INVALID_FLAG_MSG);
 
     match result {
         Ok(_) => println!("Finished handling args"),
