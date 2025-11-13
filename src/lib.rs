@@ -67,6 +67,10 @@ pub fn handle_flags<'a>(
     args.next();
 
     while let Some(arg) = args.next() {
+        if seen.contains(&arg.as_str()) {
+            continue;
+        }
+
         let found = flags
             .iter()
             .find(|ele| ele.text.contains(&arg.as_str()))
