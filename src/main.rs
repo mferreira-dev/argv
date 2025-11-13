@@ -19,5 +19,10 @@ fn main() {
         FlagType::SingleArg,
     );
 
-    argv::handle_flags(env::args(), vec![help_flag, rom_flag]);
+    let result = argv::handle_flags(env::args(), vec![help_flag, rom_flag]);
+
+    match result {
+        Ok(_) => println!("Finished handling args"),
+        Err(msg) => eprintln!("{msg}"),
+    }
 }
