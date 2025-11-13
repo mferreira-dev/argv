@@ -4,9 +4,19 @@ argv is a simple argument handling library written in Rust.
 
 ## Getting Started
 
-For the time being you can test the library by simply running it.
+### Including
+
+To include argv in your project add the following to its ```Cargo.toml``` file.
 ```
-$ cargo run -- [arg1] [arg2] [arg3]
+[dependencies]
+argv = { git = "https://github.com/mferreira-dev/argv.git" }
+```
+
+### Contributing
+
+Otherwise if you'd like to make your own changes simply clone the repo to your local machine.
+```
+$ git clone https://github.com/mferreira-dev/argv.git
 ```
 
 ## License
