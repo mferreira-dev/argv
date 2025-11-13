@@ -59,6 +59,7 @@ impl<'a> Flag<'a> {
 pub fn handle_flags<'a>(
     mut args: impl Iterator<Item = String>,
     flags: Vec<Flag<'a>>,
+    invalid_flag_msg: &'static str,
 ) -> Result<(), &'static str> {
     let mut seen = HashSet::new();
 
@@ -69,7 +70,7 @@ pub fn handle_flags<'a>(
         let found = flags
             .iter()
             .find(|ele| ele.text.contains(&arg.as_str()))
-            .ok_or("Invalid flag")?;
+            .ok_or(invalid_flag_msg)?;
 
         match &found.action {
             FlagAction::NoArg(action) => (action)(),

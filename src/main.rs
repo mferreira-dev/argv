@@ -6,6 +6,8 @@ const HELP_FLAG_LONG: &str = "--help";
 const ROM_FLAG_SHORT: &str = "-r";
 const ROM_FLAG_LONG: &str = "--rom";
 
+const INVALID_FLAG_MSG: &str = "Invalid flag";
+
 fn main() {
     let help_flag = Flag::new(
         vec![HELP_FLAG_SHORT, HELP_FLAG_LONG],
@@ -20,7 +22,7 @@ fn main() {
         })),
     );
 
-    let result = argv::handle_flags(env::args(), vec![help_flag, rom_flag]);
+    let result = argv::handle_flags(env::args(), vec![help_flag, rom_flag], INVALID_FLAG_MSG);
 
     match result {
         Ok(_) => println!("Finished handling args"),
