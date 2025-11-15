@@ -27,7 +27,7 @@ pub struct Flag<'a> {
 /// ```
 pub enum FlagAction<'a> {
     /// Flag accepts no arguments.
-    NoArg(Box<dyn Fn() + 'a>),
+    NoArg(Box<dyn FnMut() + 'a>),
 
     /// Flag accepts a single argument.
     SingleArg(Box<dyn FnMut(Option<String>) + 'a>),
