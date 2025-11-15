@@ -30,7 +30,7 @@ pub enum FlagAction<'a> {
     NoArg(Box<dyn Fn() + 'a>),
 
     /// Flag accepts a single argument.
-    SingleArg(Box<dyn Fn(Option<String>) + 'a>),
+    SingleArg(Box<dyn FnMut(Option<String>) + 'a>),
 }
 
 impl<'a> Flag<'a> {
