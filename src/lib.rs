@@ -12,7 +12,7 @@ use std::collections::HashSet;
 /// ```
 pub struct Flag<'a> {
     /// Exhaustive list of all flag variations.
-    text: Vec<&'a str>,
+    variations: Vec<&'a str>,
 
     /// Closure to be called when flag is parsed.
     action: FlagAction<'a>,
@@ -34,8 +34,8 @@ pub enum FlagAction<'a> {
 }
 
 impl<'a> Flag<'a> {
-    pub fn new(text: Vec<&'a str>, action: FlagAction<'a>) -> Self {
-        Self { text, action }
+    pub fn new(variations: Vec<&'a str>, action: FlagAction<'a>) -> Self {
+        Self { variations, action }
     }
 }
 
@@ -58,7 +58,7 @@ impl<'a> Flag<'a> {
 /// ```
 pub fn handle_flags<'a>(
     mut args: impl Iterator<Item = String>,
-    flags: Vec<Flag<'a>>,
+    mut flags: Vec<Flag<'a>>,
     invalid_flag_msg: &'static str,
 ) -> Result<(), &'static str> {
     let mut seen = HashSet::new();
@@ -67,22 +67,22 @@ pub fn handle_flags<'a>(
     args.next();
 
     while let Some(arg) = args.next() {
-        if seen.contains(&arg.as_str()) {
+        if seen.contains(&arg.to_string()) {
             continue;
         }
 
         let found = flags
-            .iter()
-            .find(|ele| ele.text.contains(&arg.as_str()))
+            .iter_mut()
+            .find(|flag| flag.variations.contains(&arg.as_str()))
             .ok_or(invalid_flag_msg)?;
 
-        match &found.action {
+        match &mut found.action {
             FlagAction::NoArg(action) => (action)(),
             FlagAction::SingleArg(action) => (action)(args.next()),
         }
 
-        found.text.iter().for_each(|ele| {
-            seen.insert(ele);
+        found.variations.iter().for_each(|variation| {
+            seen.insert(variation.to_string());
         });
     }
 

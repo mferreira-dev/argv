@@ -14,11 +14,13 @@ fn main() {
         FlagAction::NoArg(Box::new(|| println!("foo"))),
     );
 
+    let mut bar_result = String::new();
+
     let bar_flag = Flag::new(
         vec![BAR_FLAG_SHORT, BAR_FLAG_LONG],
         FlagAction::SingleArg(Box::new(|arg| {
-            let arg = arg.unwrap_or(String::from("nothing"));
-            println!("arg: {arg}")
+            bar_result = arg.unwrap_or(String::from("nothing"));
+            println!("arg: {bar_result}");
         })),
     );
 
