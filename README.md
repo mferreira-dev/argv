@@ -9,7 +9,7 @@ argv is a simple argument handling library written in Rust.
 To include argv in your project add the following to its ```Cargo.toml``` file.
 ```
 [dependencies]
-argv = { git = "https://github.com/mferreira-dev/argv.git" }
+argv = { git = "https://github.com/mferreira-dev/argv.git", branch = "main" }
 ```
 
 ### Contributing
