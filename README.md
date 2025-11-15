@@ -1,6 +1,6 @@
 ## argv - arg parser library
 
-argv is a simple argument handling library written in Rust.
+argv is a simple argument handling library entirely written in Rust.
 
 ## Getting Started
 
